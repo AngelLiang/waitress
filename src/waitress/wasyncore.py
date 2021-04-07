@@ -169,6 +169,8 @@ def poll(timeout=0.0, map=None):
             return
 
         try:
+            # 使用 select 的 select
+            # https://docs.python.org/zh-cn/3.6/library/select.html#select.select
             r, w, e = select.select(r, w, e, timeout)
         except OSError as err:
             if err.args[0] != EINTR:
@@ -202,6 +204,8 @@ def poll2(timeout=0.0, map=None):
     if timeout is not None:
         # timeout is in milliseconds
         timeout = int(timeout * 1000)
+    # 使用 select 的 poll，部分操作系统不支持
+    # https://docs.python.org/zh-cn/3.6/library/select.html#select.poll
     pollster = select.poll()
     if map:
         for fd, obj in list(map.items()):
