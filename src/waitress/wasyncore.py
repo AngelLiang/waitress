@@ -151,9 +151,9 @@ def poll(timeout=0.0, map=None):
     if map is None:  # pragma: no cover
         map = socket_map
     if map:
-        r = []
-        w = []
-        e = []
+        r = []  # 读队列
+        w = []  # 写队列
+        e = []  # 异常队列
         for fd, obj in list(map.items()):  # list() call FBO py3
             is_r = obj.readable()
             is_w = obj.writable()
