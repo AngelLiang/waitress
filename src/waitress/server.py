@@ -318,6 +318,7 @@ class BaseWSGIServer(wasyncore.dispatcher):
         self.channel_class(self, conn, addr, self.adj, map=self._map)
 
     def run(self):
+        """入口"""
         try:
             self.asyncore.loop(
                 timeout=self.adj.asyncore_loop_timeout,
